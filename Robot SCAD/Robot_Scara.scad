@@ -29,12 +29,15 @@ ALTO_BRAZO2 = 6;
 
 
 
+base();
 motor();
-translate([LARGO_BRAZO2-5.5,-5,50]){
+union(){
+    translate([LARGO_BRAZO2-5.5,-5,46.5]){
     rotate([180,0,-90])
     motor();
 }
-base();
+brazo1();
+}
 brazo2();
 
 module base(){
@@ -66,6 +69,7 @@ module motor(){
 
 
 //Brazo 1
+module brazo1(){
 difference(){
     union(){
 translate([0,-ANCHO_BRAZO,ALTO_BRAZO*2])
@@ -87,7 +91,7 @@ translate([LARGO_BRAZO-5,-ANCHO_BRAZO*3/2,ALTO_BRAZO*2 +2])
 cube([ALTO_BRAZO,ANCHO_BRAZO*2,6]);
 
 }
-
+}
 
 module brazo2(){
 translate([LARGO_BRAZO2,0,10])
