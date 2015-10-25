@@ -26,21 +26,25 @@ DIAMETRO_CILINDRO_BRAZO = 10;
 LARGO_BRAZO2 = 100;
 ANCHO_BRAZO2 = 10;
 ALTO_BRAZO2 = 6;
+//Medidas herramienta
+DIAMETRO_HERRAMIENTA = 10;
+ALTURA_HERRAMIENTA = 4;
 
 
 
 base();
-motor();
+#motor();
 //hull(){
 union(){
     translate([LARGO_BRAZO2+5.5,-5,46.5]){
     rotate([180,0,90])
-    motor();
+    #motor();
 }
 //}
 brazo1();
 }
 brazo2();
+herramienta();
 
 module base(){
     difference(){
@@ -103,6 +107,8 @@ cylinder(h=DIAMETRO_CILINDRO_BRAZO*2, d = DIAMETRO_CILINDRO_BRAZO/2, $fn = 100);
 translate([LARGO_BRAZO-5,-ANCHO_BRAZO*3/2,ALTO_BRAZO*2 +2])
 cube([ALTO_BRAZO,ANCHO_BRAZO*2,6]);
 
+translate([7,-ANCHO_BRAZO+1,ALTO_BRAZO*2.1])
+cube([LARGO_BRAZO*.8,ANCHO_BRAZO*.8,ALTO_BRAZO*.8]);
 }
 }
 
@@ -124,11 +130,20 @@ cylinder(h=ALTO_BRAZO2, d = DIAMETRO_CILINDRO_BRAZO, $fn = 100);
       cube([10,6,15]);
 }
     
-       
+translate([10,-ANCHO_BRAZO2*.9,ALTO_BRAZO2*2.1])
+cube([LARGO_BRAZO2*.8,ANCHO_BRAZO2*.8,ALTO_BRAZO2*.8]);
 translate([0,-ANCHO_BRAZO2/2,ALTO_BRAZO2*2])
 cylinder(h=DIAMETRO_CILINDRO_BRAZO+2, d = DIAMETRO_CILINDRO_BRAZO/2, $fn = 100);
 translate([LARGO_BRAZO2,-ANCHO_BRAZO2/2,ALTO_BRAZO2*2])
 cylinder(h=DIAMETRO_CILINDRO_BRAZO*2, d = DIAMETRO_CILINDRO_BRAZO/2, $fn = 100);
 }
 
+}
+
+module herramienta () {
+    translate([LARGO_BRAZO2 + LARGO_BRAZO,-ANCHO_BRAZO2/2,-2])
+    cylinder (d=DIAMETRO_CILINDRO_BRAZO/2, h=40+2, $fn=20);
+    
+    translate([LARGO_BRAZO2 + LARGO_BRAZO,-ANCHO_BRAZO2/2, -ALTURA_HERRAMIENTA])
+    cylinder(d = DIAMETRO_HERRAMIENTA, h = ALTURA_HERRAMIENTA, $fn=5);
 }
