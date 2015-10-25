@@ -48,8 +48,19 @@ module base(){
         translate([0,0,5])
         cube([BASE_X-2,BASE_Y-2,BASE_Z+2], center = true);
     }
+    
+    union(){
+        translate([0,MOTOR_Y/2+         FLAGS_MOTOR_Z/2,1.2])
+        rotate([0,90,90])
+        cube([FLAGS_MOTOR_X*8,FLAGS_MOTOR_Y*2,FLAGS_MOTOR_Z], center = true);
+    }
+    
+    union(){
+        translate([0,-(MOTOR_Y/2+         FLAGS_MOTOR_Z/2),1.2])
+        rotate([0,90,90])
+        cube([FLAGS_MOTOR_X*8,FLAGS_MOTOR_Y*2,FLAGS_MOTOR_Z], center = true);
+    }
 }
-
 
 module motor(){
     cube([MOTOR_X,MOTOR_Y,MOTOR_Z*.7], center = true);
