@@ -22,11 +22,20 @@ ANCHO_BRAZO = 10;
 ALTO_BRAZO = 10;
 //Medidas de los cilindros del brazo
 DIAMETRO_CILINDRO_BRAZO = 10;
+//Medidas del brazo2
+LARGO_BRAZO2 = 100;
+ANCHO_BRAZO2 = 10;
+ALTO_BRAZO2 = 6;
 
 
 
 motor();
+translate([LARGO_BRAZO2-5.5,-5,50]){
+    rotate([180,0,-90])
+    motor();
+}
 base();
+brazo2();
 
 module base(){
     difference(){
@@ -58,7 +67,6 @@ module motor(){
 
 //Brazo 1
 difference(){
-    
     union(){
 translate([0,-ANCHO_BRAZO,ALTO_BRAZO*2])
 cube([LARGO_BRAZO,ANCHO_BRAZO,ALTO_BRAZO]);
@@ -81,3 +89,26 @@ cube([ALTO_BRAZO,ANCHO_BRAZO*2,6]);
 }
 
 
+module brazo2(){
+translate([LARGO_BRAZO2,0,10])
+difference(){
+    
+    union(){
+translate([0,-ANCHO_BRAZO2,ALTO_BRAZO2*2])
+cube([LARGO_BRAZO2,ANCHO_BRAZO2,ALTO_BRAZO2]);
+       
+translate([0,-ANCHO_BRAZO2/2,ALTO_BRAZO2*2])
+cylinder(h=ALTO_BRAZO2, d = DIAMETRO_CILINDRO_BRAZO, $fn = 100);
+        
+translate([LARGO_BRAZO2,-ANCHO_BRAZO2/2,ALTO_BRAZO2*2])
+cylinder(h=ALTO_BRAZO2, d = DIAMETRO_CILINDRO_BRAZO, $fn = 100);
+}
+    
+       
+translate([0,-ANCHO_BRAZO2/2,ALTO_BRAZO2*2])
+cylinder(h=DIAMETRO_CILINDRO_BRAZO+2, d = DIAMETRO_CILINDRO_BRAZO/2, $fn = 100);
+translate([LARGO_BRAZO2,-ANCHO_BRAZO2/2,ALTO_BRAZO2*2])
+cylinder(h=DIAMETRO_CILINDRO_BRAZO*2, d = DIAMETRO_CILINDRO_BRAZO/2, $fn = 100);
+}
+
+}
